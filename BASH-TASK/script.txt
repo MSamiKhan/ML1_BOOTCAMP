@@ -1,0 +1,32 @@
+sed $4 's/Software/IT/' employees.txt > tmep1.txt
+$ awk -F, '$3 >= 30' temp1.txt > temp2.txt
+
+$awk 'BEGIN {
+    print "Average Salaries w.r.t to Departments"
+    FS = ","
+}
+{
+    if ($4 ~ /Marketing/) {
+        market_no++;
+        mark_tot += $5;
+    } else if ($4 ~ /IT/) {
+        IT_no++;
+        IT_tot += $5;
+    } else if ($4 ~ /HR/) {
+        HR_no++;
+        HR_tot += $5;
+    } else if ($4 ~ /Finance/) {
+        Finance_no++;
+        Finance_tot += $5;
+    }
+}
+END {
+    if (HR_no > 0) print "HR", int(HR_tot / HR_no);
+    if (market_no > 0) print "Marketing", int(mark_tot / market_no);
+    if (Finance_no > 0) print "Finance", int(Finance_tot / Finance_no);
+    if (IT_no > 0) print "IT", int(IT_tot / IT_no);
+}' temp2.txt
+
+$ cp temp2.txt updated_employees.txt
+
+$ rm temp1.txt temp2.txt
